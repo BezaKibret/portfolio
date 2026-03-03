@@ -11,9 +11,9 @@ darkModeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
 
   if (document.body.classList.contains("dark-mode")) {
-    darkModeToggle.textContent = "☀️";
+    darkModeToggle.textContent = "☀️"; // Sun icon
   } else {
-    darkModeToggle.textContent = "🌙";
+    darkModeToggle.textContent = "🌙"; // Moon icon
   }
 });
 
@@ -27,14 +27,13 @@ form.addEventListener("submit", function(e) {
   const email = document.getElementById("email").value.trim();
   const message = document.getElementById("message").value.trim();
 
-  if (!name ||  !email ||!message) {
+  if (!name  || !email || !message) {
     formMessage.style.color = "red";
     formMessage.textContent = "Please fill all fields!";
     return;
   }
 
-  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
   if (!email.match(emailPattern)) {
     formMessage.style.color = "red";
     formMessage.textContent = "Please enter a valid email!";
@@ -71,9 +70,7 @@ const appearOptions = {
 
 const appearOnScroll = new IntersectionObserver(function(entries, observer) {
   entries.forEach(entry => {
-    if (!entry.isIntersecting) {
-      return;
-    } else {
+    if (entry.isIntersecting) {
       entry.target.style.opacity = 1;
       entry.target.style.transform = "translateY(0)";
       observer.unobserve(entry.target);
